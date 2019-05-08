@@ -1,8 +1,8 @@
 <div>
   <form (ngSubmit)="onSubmit()">
     <div>
-      <label for="auth-email">Email</label>
-      <input type="email" name="email" id="auth-email" placeholder="jd@example.com" [(ngModel)]="email">
+      <label for="auth-username">Username</label>
+      <input type="email" name="username" id="auth-username" placeholder="jd@example.com" [(ngModel)]="username">
     </div>
     <div>
       <label for="auth-password">Password</label>
@@ -12,11 +12,20 @@
       <button type="submit">Login</button>
     </div>
 
-    <h3>The stuff:</h3>
-
-    <ul>
-      <li>email: {{ email }}</li>
-      <li>password: {{ password }}</li>
-    </ul>
   </form>
+  <div>
+    <h3>The stuff:</h3>
+        <ul>
+          <li>username: {{ username }}</li>
+          <li>password: {{ password }}</li>
+        </ul>
+  </div>
+  <div *ngIf="token$ | async">
+    <h3>Login stuff:</h3>
+    <ul>
+      <li>name: {{ (token$ | async)?.user.firstName }} {{ (token$ | async)?.user.lastName }}</li>
+      <li>email: {{ (token$ | async)?.user.email }}</li>
+    </ul>
+    <img src="{{(token$|async)?.user.profilePictureUrl}}" alt="">
+  </div>
 </div>

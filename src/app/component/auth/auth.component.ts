@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Token } from '../../models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -6,21 +9,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  email: string;
+  username: string;
   password: string;
 
-  constructor() { }
+  token$: Observable<Token>;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.username = 'jd';
+    this.password = 'SecurePassword';
   }
 
   onSubmit() {
     const user = {
-      email: this.email,
+      username: this.username,
       password: this.password
     };
 
     console.log('Submitting login....', user);
+
+    this.token$ = this.authService.login(user);
   }
 
 }
