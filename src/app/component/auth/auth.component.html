@@ -25,6 +25,7 @@
     <ul>
       <li>name: {{ (token$ | async)?.user.firstName }} {{ (token$ | async)?.user.lastName }}</li>
       <li>email: {{ (token$ | async)?.user.email }}</li>
+      <li>phone: {{ (token$ | async)?.user.phone }}</li>
     </ul>
     <img src="{{(token$|async)?.user.profilePictureUrl}}" alt="">
   </div>
