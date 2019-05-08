@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Token } from '../../models/user';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthState, getToken } from 'src/app/reducers/auth.reducer';
+import { Store } from '@ngrx/store';
+import * as authActions from '../../actions/auth.action';
 
 @Component({
   selector: 'app-auth',
@@ -14,7 +16,9 @@ export class AuthComponent implements OnInit {
 
   token$: Observable<Token>;
 
-  constructor(private authService: AuthService) { }
+  constructor(private store: Store<AuthState>) {
+    this.token$ = this.store.select(getToken);
+  }
 
   ngOnInit() {
     this.username = 'jd';
@@ -29,7 +33,7 @@ export class AuthComponent implements OnInit {
 
     console.log('Submitting login....', user);
 
-    this.token$ = this.authService.login(user);
+    this.store.dispatch(new authActions.Authenticate(user));
   }
 
 }

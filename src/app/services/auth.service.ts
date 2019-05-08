@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token, LoginView } from '../models/user';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +17,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(loginView: LoginView) {
+  login(loginView: LoginView): Observable<any> {
     return this.http.post<Token>(`${this.baseUrl}/api/auth/login`, loginView, httpOptions);
   }
 }
