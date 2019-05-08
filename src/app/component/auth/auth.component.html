@@ -1,0 +1,22 @@
+<div>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="auth-email">Email</label>
+      <input type="email" name="email" id="auth-email" placeholder="jd@example.com" [(ngModel)]="email">
+    </div>
+    <div>
+      <label for="auth-password">Password</label>
+      <input type="password" name="password" id="auth-password" placeholder="MyÜberZ3cureP455w0!d" [(ngModel)]="password">
+    </div>
+    <div>
+      <button type="submit">Login</button>
+    </div>
+
+    <h3>The stuff:</h3>
+
+    <ul>
+      <li>email: {{ email }}</li>
+      <li>password: {{ password }}</li>
+    </ul>
+  </form>
+</div>
